@@ -8,20 +8,23 @@ import {
   GetTotalBasketPriceResponse,
   RemoveFromBasketResponse,
 } from '../interfaces/basket';
+import { ShopItem } from '../shop/shop-item.entity';
 
 @Injectable()
 export class BasketService {
   constructor(@Inject(ShopService) private shopService: ShopService) {}
 
   async add(product: AddItemDto): Promise<AddToBasketResponse> {
-    const { count, name } = product;
+    const { count, id } = product;
+
+    const shopItem = await this.shopService.getOneItem(id);
 
     if (
-      typeof name !== 'string' ||
+      typeof id !== 'string' ||
       typeof count !== 'number' ||
-      name === '' ||
+      id === '' ||
       count < 1 ||
-      !(await this.shopService.hasItem(name))
+      !shopItem
     ) {
       return {
         isSuccess: false,
@@ -29,8 +32,11 @@ export class BasketService {
     }
 
     const item = new ItemInBasket();
-    item.name = name;
     item.count = count;
+
+    await item.save();
+
+    item.shopItem = shopItem;
 
     await item.save();
 
@@ -56,7 +62,9 @@ export class BasketService {
   }
 
   async getAll(): Promise<ItemInBasket[]> {
-    return ItemInBasket.find();
+    return ItemInBasket.find({
+      relations: ['shopItem'],
+    });
   }
 
   async getTotalPrice(): Promise<GetTotalBasketPriceResponse> {
@@ -64,10 +72,7 @@ export class BasketService {
 
     return (
       await Promise.all(
-        items.map(
-          async (item) =>
-            (await this.shopService.getPrice(item.name)) * item.count * 1.23,
-        ),
+        items.map(async (item) => item.shopItem.price * item.count * 1.23),
       )
     ).reduce((prev, curr) => prev + curr, 0);
   }

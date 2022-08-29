@@ -7,7 +7,11 @@ import { ShopModule } from './shop/shop.module';
 import { BasketModule } from './basket/basket.module';
 
 @Module({
-  imports: [TypeOrmModule.forRootAsync(typeOrmConfig), ShopModule, BasketModule],
+  imports: [
+    TypeOrmModule.forRootAsync(typeOrmConfig),
+    ShopModule,
+    BasketModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

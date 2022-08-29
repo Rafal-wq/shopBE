@@ -28,12 +28,14 @@ export class BasketController {
   }
 
   @Delete('/:index')
-  removeProduct(@Param('index') index: string): RemoveFromBasketResponse {
-    return this.basketService.remove(Number(index));
+  removeProduct(
+    @Param('index') index: string,
+  ): Promise<RemoveFromBasketResponse> {
+    return this.basketService.remove(index);
   }
 
   @Get('/')
-  getBasket(): GetBasketResponse {
+  getBasket(): Promise<GetBasketResponse> {
     return this.basketService.getAll();
   }
 
