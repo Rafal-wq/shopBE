@@ -6,10 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ShopItem } from './shop-item.entity';
 
 @Module({
-  imports: [
-    forwardRef(() => BasketModule),
-    TypeOrmModule.forFeature([ShopItem]),
-  ],
+  imports: [forwardRef(() => BasketModule)],
   providers: [ShopService],
   controllers: [ShopController],
   exports: [ShopService],
