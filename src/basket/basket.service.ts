@@ -67,6 +67,10 @@ export class BasketService {
     });
   }
 
+  async clearBasket() {
+    await ItemInBasket.delete({});
+  }
+
   async getTotalPrice(): Promise<GetTotalBasketPriceResponse> {
     const items = await this.getAll();
 
