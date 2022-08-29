@@ -27,11 +27,14 @@ export class BasketController {
     return this.basketService.add(product);
   }
 
-  @Delete('/:index')
-  removeProduct(
-    @Param('index') index: string,
-  ): Promise<RemoveFromBasketResponse> {
-    return this.basketService.remove(index);
+  @Delete('/all')
+  clearBasket() {
+    this.basketService.clearBasket();
+  }
+
+  @Delete('/:id')
+  removeProduct(@Param('id') id: string): Promise<RemoveFromBasketResponse> {
+    return this.basketService.remove(id);
   }
 
   @Get('/')
