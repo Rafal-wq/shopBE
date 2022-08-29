@@ -4,27 +4,33 @@ import { AddItemDto } from './dto/add-item.dto';
 import { ItemInBasket } from './item-in-basket.entity';
 import {
   AddToBasketResponse,
-  GetBasketResponse,
   GetTotalBasketPriceResponse,
   RemoveFromBasketResponse,
 } from '../interfaces/basket';
-import { ShopItem } from '../shop/shop-item.entity';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class BasketService {
-  constructor(@Inject(ShopService) private shopService: ShopService) {}
+  constructor(
+    @Inject(ShopService) private shopService: ShopService,
+    @Inject(UserService) private userService: UserService,
+  ) {}
 
   async add(product: AddItemDto): Promise<AddToBasketResponse> {
-    const { count, id } = product;
+    const { count, productId, userId } = product;
 
-    const shopItem = await this.shopService.getOneItem(id);
+    const shopItem = await this.shopService.getOneItem(productId);
+    const user = await this.userService.getOneUser(userId);
 
     if (
-      typeof id !== 'string' ||
+      typeof userId !== 'string' ||
+      typeof productId !== 'string' ||
       typeof count !== 'number' ||
-      id === '' ||
+      userId === '' ||
+      productId === '' ||
       count < 1 ||
-      !shopItem
+      !shopItem ||
+      !user
     ) {
       return {
         isSuccess: false,
@@ -37,6 +43,7 @@ export class BasketService {
     await item.save();
 
     item.shopItem = shopItem;
+    item.user = user;
 
     await item.save();
 
