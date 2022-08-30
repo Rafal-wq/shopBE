@@ -53,8 +53,20 @@ export class BasketService {
     };
   }
 
-  async remove(id: string): Promise<RemoveFromBasketResponse> {
-    const item = await ItemInBasket.findOne({ where: { id } });
+  async remove(
+    itemInBasketId: string,
+    userId: string,
+  ): Promise<RemoveFromBasketResponse> {
+    const user = await this.userService.getOneUser(userId);
+    if (!user) {
+      throw new Error('User not found!');
+    }
+    const item = await ItemInBasket.findOne({
+      where: {
+        user: user.valueOf(),
+        id: itemInBasketId,
+      },
+    });
     if (item) {
       await item.remove();
 
@@ -68,18 +80,33 @@ export class BasketService {
     };
   }
 
-  async getAll(): Promise<ItemInBasket[]> {
+  async getAllForUser(userId: string): Promise<ItemInBasket[]> {
+    const user = await this.userService.getOneUser(userId);
+
+    if (!user) {
+      throw new Error('User not found!');
+    }
+
     return ItemInBasket.find({
+      where: { user: user.valueOf() },
       relations: ['shopItem'],
     });
   }
 
-  async clearBasket() {
-    await ItemInBasket.delete({});
+  async clearBasket(userId: string) {
+    const user = await this.userService.getOneUser(userId);
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    await ItemInBasket.delete({
+      user: user.valueOf(),
+    });
   }
 
-  async getTotalPrice(): Promise<GetTotalBasketPriceResponse> {
-    const items = await this.getAll();
+  async getTotalPrice(userId: string): Promise<GetTotalBasketPriceResponse> {
+    const items = await this.getAllForUser(userId);
 
     return (
       await Promise.all(
