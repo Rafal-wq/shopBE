@@ -4,6 +4,7 @@ import { AddItemDto } from './dto/add-item.dto';
 import { ItemInBasket } from './item-in-basket.entity';
 import {
   AddToBasketResponse,
+  GetBasketStatsResponse,
   GetTotalBasketPriceResponse,
   RemoveFromBasketResponse,
 } from '../interfaces/basket';
