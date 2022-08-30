@@ -4,6 +4,7 @@ import { AddItemDto } from './dto/add-item.dto';
 import { ItemInBasket } from './item-in-basket.entity';
 import {
   AddToBasketResponse,
+  GetBasketStatsResponse,
   GetTotalBasketPriceResponse,
   RemoveFromBasketResponse,
 } from '../interfaces/basket';
@@ -91,6 +92,10 @@ export class BasketService {
       where: { user: user.valueOf() },
       relations: ['shopItem'],
     });
+  }
+
+  async getAllForAdmin(): Promise<ItemInBasket[]> {
+    return ItemInBasket.find({ relations: ['shopItem', 'user'] });
   }
 
   async clearBasket(userId: string) {
