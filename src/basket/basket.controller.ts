@@ -27,14 +27,17 @@ export class BasketController {
     return this.basketService.add(product);
   }
 
-  @Delete('/all')
-  clearBasket() {
-    this.basketService.clearBasket();
+  @Delete('/all/:userId')
+  clearBasket(@Param('userId') userId: string) {
+    this.basketService.clearBasket(userId);
   }
 
-  @Delete('/:id')
-  removeProduct(@Param('id') id: string): Promise<RemoveFromBasketResponse> {
-    return this.basketService.remove(id);
+  @Delete('/:itemInBasketId/:userId')
+  removeProduct(
+    @Param('itemInBasketId') itemInBasketId: string,
+    @Param('userId') userId: string,
+  ): Promise<RemoveFromBasketResponse> {
+    return this.basketService.remove(itemInBasketId, userId);
   }
 
   @Get('/:userId')

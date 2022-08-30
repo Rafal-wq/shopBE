@@ -53,8 +53,20 @@ export class BasketService {
     };
   }
 
-  async remove(id: string): Promise<RemoveFromBasketResponse> {
-    const item = await ItemInBasket.findOne({ where: { id } });
+  async remove(
+    itemInBasketId: string,
+    userId: string,
+  ): Promise<RemoveFromBasketResponse> {
+    const user = await this.userService.getOneUser(userId);
+    if (!user) {
+      throw new Error('User not found!');
+    }
+    const item = await ItemInBasket.findOne({
+      where: {
+        user: user.valueOf(),
+        id: itemInBasketId,
+      },
+    });
     if (item) {
       await item.remove();
 
@@ -81,9 +93,15 @@ export class BasketService {
     });
   }
 
-  async clearBasket() {
+  async clearBasket(userId: string) {
+    const user = await this.userService.getOneUser(userId);
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
     await ItemInBasket.delete({
-      // user: user.valueOf(),
+      user: user.valueOf(),
     });
   }
 
