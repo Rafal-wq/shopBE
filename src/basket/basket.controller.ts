@@ -18,6 +18,7 @@ import {
   RemoveFromBasketResponse,
 } from '../interfaces/basket';
 import { PasswordProtectGuard } from '../guards/password-protect.guard';
+import { UsePassword } from '../decorators/use-password.decorator';
 
 @Controller('basket')
 export class BasketController {
@@ -45,11 +46,13 @@ export class BasketController {
 
   @Get('/admin')
   @UseGuards(PasswordProtectGuard)
+  @UsePassword('admin1')
   getBasketForAdmin(): Promise<GetBasketResponse> {
     return this.basketService.getAllForAdmin();
   }
 
   @Get('/stats')
+  @UsePassword('passforstats')
   @UseGuards(PasswordProtectGuard)
   getStats(): Promise<GetBasketStatsResponse> {
     return; //this.basketService.getStats();
