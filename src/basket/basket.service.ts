@@ -68,18 +68,27 @@ export class BasketService {
     };
   }
 
-  async getAll(): Promise<ItemInBasket[]> {
+  async getAllForUser(userId: string): Promise<ItemInBasket[]> {
+    const user = await this.userService.getOneUser(userId);
+
+    if (!user) {
+      throw new Error('User not found!');
+    }
+
     return ItemInBasket.find({
+      where: { user: user.valueOf() },
       relations: ['shopItem'],
     });
   }
 
   async clearBasket() {
-    await ItemInBasket.delete({});
+    await ItemInBasket.delete({
+      // user: user.valueOf(),
+    });
   }
 
-  async getTotalPrice(): Promise<GetTotalBasketPriceResponse> {
-    const items = await this.getAll();
+  async getTotalPrice(userId: string): Promise<GetTotalBasketPriceResponse> {
+    const items = await this.getAllForUser(userId);
 
     return (
       await Promise.all(

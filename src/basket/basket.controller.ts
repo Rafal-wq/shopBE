@@ -37,13 +37,15 @@ export class BasketController {
     return this.basketService.remove(id);
   }
 
-  @Get('/')
-  getBasket(): Promise<GetBasketResponse> {
-    return this.basketService.getAll();
+  @Get('/:userId')
+  getBasket(@Param('userId') userId: string): Promise<GetBasketResponse> {
+    return this.basketService.getAllForUser(userId);
   }
 
-  @Get('/total-price')
-  getTotalBasketPrice(): Promise<GetTotalBasketPriceResponse> {
-    return this.basketService.getTotalPrice();
+  @Get('/total-price/:userId')
+  getTotalBasketPrice(
+    @Param('userId') userId: string,
+  ): Promise<GetTotalBasketPriceResponse> {
+    return this.basketService.getTotalPrice(userId);
   }
 }
