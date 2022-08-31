@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { BasketService } from './basket.service';
 import { AddItemDto } from './dto/add-item.dto';
@@ -19,6 +20,9 @@ import {
 } from '../interfaces/basket';
 import { PasswordProtectGuard } from '../guards/password-protect.guard';
 import { UsePassword } from '../decorators/use-password.decorator';
+import { MyTimeoutInterceptor } from '../interceptors/my-timeout.interceptor';
+import { MyCacheInterceptor } from '../interceptors/my-cache.interceptor';
+import { UseCacheTime } from '../decorators/use-cache-time.decorator';
 
 @Controller('basket')
 export class BasketController {
@@ -47,6 +51,8 @@ export class BasketController {
   @Get('/admin')
   @UseGuards(PasswordProtectGuard)
   @UsePassword('admin1')
+  @UseInterceptors(MyTimeoutInterceptor, MyCacheInterceptor)
+  @UseCacheTime(5)
   getBasketForAdmin(): Promise<GetBasketResponse> {
     return this.basketService.getAllForAdmin();
   }
@@ -54,6 +60,7 @@ export class BasketController {
   @Get('/stats')
   @UsePassword('passforstats')
   @UseGuards(PasswordProtectGuard)
+  @UseInterceptors(MyTimeoutInterceptor, MyCacheInterceptor)
   getStats(): Promise<GetBasketStatsResponse> {
     return; //this.basketService.getStats();
   }

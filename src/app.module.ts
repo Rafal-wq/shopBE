@@ -8,9 +8,10 @@ import { ShopService } from './shop/shop.service';
 import { BasketService } from './basket/basket.service';
 import { typeOrmConfig } from './config/config';
 import { UserModule } from './user/user.module';
+import { CacheModule } from './cache/cache.module';
 
 @Module({
-  imports: [TypeOrmModule.forRootAsync(typeOrmConfig), UserModule],
+  imports: [TypeOrmModule.forRootAsync(typeOrmConfig), UserModule, CacheModule],
   controllers: [AppController, ShopController, BasketController],
   providers: [AppService, ShopService, BasketService],
   exports: [TypeOrmModule],
