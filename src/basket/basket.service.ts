@@ -9,6 +9,7 @@ import {
   RemoveFromBasketResponse,
 } from '../interfaces/basket';
 import { UserService } from '../user/user.service';
+import { getConnection, getConnectionManager } from 'typeorm';
 
 @Injectable()
 export class BasketService {
@@ -119,4 +120,10 @@ export class BasketService {
       )
     ).reduce((prev, curr) => prev + curr, 0);
   }
+
+  // async getStats(): Promise<GetBasketStatsResponse> {
+  //   const { itemInBasketAvgPrice } = await getConnection()
+  //     .createQueryBuilder()
+  //     .select('xxxx', 'itemInBasketAvgPrice');
+  // } //@TODO
 }
