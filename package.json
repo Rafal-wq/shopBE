@@ -29,6 +29,7 @@
     "@nestjs/typeorm": "^9.0.1",
     "@types/node": "^18.7.14",
     "eslint-plugin-nestjs": "^1.2.3",
+    "helmet": "^6.0.0",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
