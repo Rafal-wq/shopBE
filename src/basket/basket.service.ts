@@ -10,12 +10,15 @@ import {
 } from '../interfaces/basket';
 import { UserService } from '../user/user.service';
 import { getConnection, getConnectionManager } from 'typeorm';
+import { MailService } from '../mail/mail.service';
+import { addedToBasketInfoEmailTemplate } from '../templates/email/added-to-basket-info';
 
 @Injectable()
 export class BasketService {
   constructor(
     @Inject(ShopService) private shopService: ShopService,
     @Inject(UserService) private userService: UserService,
+    @Inject(MailService) private mailService: MailService,
   ) {}
 
   async add(product: AddItemDto): Promise<AddToBasketResponse> {
@@ -48,6 +51,12 @@ export class BasketService {
     item.user = user;
 
     await item.save();
+
+    await this.mailService.sendMail(
+      user.email,
+      'Dziękujemy za dodanie do koszyka!',
+      addedToBasketInfoEmailTemplate(),
+    );
 
     return {
       isSuccess: true,
