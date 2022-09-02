@@ -12,6 +12,7 @@ import { UserService } from '../user/user.service';
 import { getConnection, getConnectionManager } from 'typeorm';
 import { MailService } from '../mail/mail.service';
 import { addedToBasketInfoEmailTemplate } from '../templates/email/added-to-basket-info';
+import { User } from '../user/user.entity';
 
 @Injectable()
 export class BasketService {
@@ -21,21 +22,17 @@ export class BasketService {
     @Inject(MailService) private mailService: MailService,
   ) {}
 
-  async add(product: AddItemDto): Promise<AddToBasketResponse> {
-    const { count, productId, userId } = product;
+  async add(product: AddItemDto, user: User): Promise<AddToBasketResponse> {
+    const { count, productId } = product;
 
     const shopItem = await this.shopService.getOneItem(productId);
-    const user = await this.userService.getOneUser(userId);
 
     if (
-      typeof userId !== 'string' ||
       typeof productId !== 'string' ||
       typeof count !== 'number' ||
-      userId === '' ||
       productId === '' ||
       count < 1 ||
-      !shopItem ||
-      !user
+      !shopItem
     ) {
       return {
         isSuccess: false,
@@ -52,11 +49,11 @@ export class BasketService {
 
     await item.save();
 
-    await this.mailService.sendMail(
-      user.email,
-      'Dziękujemy za dodanie do koszyka!',
-      addedToBasketInfoEmailTemplate(),
-    );
+    // await this.mailService.sendMail(
+    //   user.email,
+    //   'Dziękujemy za dodanie do koszyka!',
+    //   addedToBasketInfoEmailTemplate(),
+    // );
 
     return {
       isSuccess: true,

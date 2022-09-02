@@ -12,9 +12,10 @@ import { CacheModule } from './cache/cache.module';
 import { DiscountCodeModule } from './discount-code/discount-code.module';
 import { CronModule } from './cron/cron.module';
 import { MailModule } from './mail/mail.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forRootAsync(typeOrmConfig), UserModule, CacheModule, DiscountCodeModule, CronModule, MailModule],
+  imports: [TypeOrmModule.forRootAsync(typeOrmConfig), UserModule, CacheModule, DiscountCodeModule, CronModule, MailModule, AuthModule],
   controllers: [AppController, ShopController, BasketController],
   providers: [AppService, ShopService, BasketService],
   exports: [TypeOrmModule],
