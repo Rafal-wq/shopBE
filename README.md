@@ -44,6 +44,6 @@ $ nest start
 # watch mode
 ```bash
 # development
-$ nest start
+$ nest start --watch
 ```
 
