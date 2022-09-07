@@ -13,9 +13,19 @@ import { DiscountCodeModule } from './discount-code/discount-code.module';
 import { CronModule } from './cron/cron.module';
 import { MailModule } from './mail/mail.module';
 import { AuthModule } from './auth/auth.module';
+import { ConsoleModule } from 'nestjs-console';
 
 @Module({
-  imports: [TypeOrmModule.forRootAsync(typeOrmConfig), UserModule, CacheModule, DiscountCodeModule, CronModule, MailModule, AuthModule],
+  imports: [
+    TypeOrmModule.forRootAsync(typeOrmConfig),
+    UserModule,
+    CacheModule,
+    DiscountCodeModule,
+    CronModule,
+    MailModule,
+    AuthModule,
+    ConsoleModule,
+  ],
   controllers: [AppController, ShopController, BasketController],
   providers: [AppService, ShopService, BasketService],
   exports: [TypeOrmModule],
