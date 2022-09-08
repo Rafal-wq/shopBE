@@ -47,3 +47,40 @@ $ nest start
 $ nest start --watch
 ```
 
+## Endpoints
+
+# Registration of user :
+<p>
+<a href="https://ibb.co/7SVty9Z" target="blank"><img src="https://i.ibb.co/Pr4GCSP/Rejestracja-usera-z-has-em.png" alt="User registration" /></a>
+</p>
+
+# Login of user (with correct password) :
+
+<p>
+<a href="https://ibb.co/84yhF9r" target="blank"><img src="https://i.ibb.co/zH3kKZX/Logowanie-poprawne-has-o.png" alt="User registration" /></a>
+</p>
+
+# Login of user (with incorrect password) :
+
+<p>
+<a href="https://ibb.co/KwwvsVB" target="blank"><img src="https://i.ibb.co/k11CDqz/Logowanie-b-e-dne-has-o.png" alt="User registration" /></a>
+</p>
+
+# Cookie by correct login :
+
+<p>
+<a href="https://ibb.co/BN4FMZ9" target="blank"><img src="https://i.ibb.co/TLKd38s/Poprawne-logowanie-ciastko.png" alt="User registration" /></a>
+</p>
+
+# Logout :
+
+<p>
+<a href="https://ibb.co/XDpxQ72" target="blank"><img src="https://i.ibb.co/jzGkNy6/Wylogowanie.png" alt="User registration" /></a>
+</p>
+
+
+# Add product to basket (you need to be logged in) :
+
+<p>
+<a href="https://ibb.co/dDMzSFD" target="blank"><img src="https://i.ibb.co/BB3SmbB/Dodawanie-do-koszyka-usera.png" alt="User registration" /></a>
+</p>
