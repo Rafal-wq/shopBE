@@ -51,7 +51,7 @@ $ nest start --watch
 
 # Registration of user :
 <p>
-<a href="https://ibb.co/7SVty9Z" target="blank"><img src="https://i.ibb.co/Pr4GCSP/Rejestracja-usera-z-has-em.png" alt="User registration" /></a>
+<a href="" target="blank"><img src="https://iili.io/Qquze2.png" alt="User registration" /></a>
 </p>
 
 # Login of user (with correct password) :
