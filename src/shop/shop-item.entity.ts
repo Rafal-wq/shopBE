@@ -30,6 +30,12 @@ export class ShopItem extends BaseEntity implements ShopItemInterface {
   })
   price: number;
 
+  @Column({
+    default: null,
+    nullable: true,
+  })
+  photoFn: string;
+
   @OneToMany((type) => ItemInBasket, (entity) => entity.shopItem)
   itemsInBasket: ItemInBasket;
 }

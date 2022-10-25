@@ -29,10 +29,12 @@ export class BasketController {
   constructor(@Inject(BasketService) private basketService: BasketService) {}
 
   @Post('/')
+  @UseGuards(AuthGuard('jwt'))
   addProductToBasket(
     @Body() product: AddItemDto,
+    @UserObj() user: User,
   ): Promise<AddToBasketResponse> {
-    return this.basketService.add(product);
+    return this.basketService.add(product, user);
   }
 
   @Delete('/all/:userId')
