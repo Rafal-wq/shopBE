@@ -23,9 +23,6 @@ import { UsePassword } from '../decorators/use-password.decorator';
 import { MyTimeoutInterceptor } from '../interceptors/my-timeout.interceptor';
 import { MyCacheInterceptor } from '../interceptors/my-cache.interceptor';
 import { UseCacheTime } from '../decorators/use-cache-time.decorator';
-import { AuthGuard } from '@nestjs/passport';
-import { UserObj } from '../decorators/user-obj.decorator';
-import { User } from '../user/user.entity';
 
 @Controller('basket')
 export class BasketController {

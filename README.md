@@ -51,7 +51,7 @@ $ nest start --watch
 
 # Registration of user :
 <p>
-<a href="https://ibb.co/7SVty9Z" target="blank"><img src="https://i.ibb.co/Pr4GCSP/Rejestracja-usera-z-has-em.png" alt="User registration" /></a>
+<a href="" target="blank"><img src="https://iili.io/Qquze2.png" alt="User registration" /></a>
 </p>
 
 # Login of user (with correct password) :
@@ -83,4 +83,9 @@ $ nest start --watch
 
 <p>
 <a href="https://ibb.co/dDMzSFD" target="blank"><img src="https://i.ibb.co/BB3SmbB/Dodawanie-do-koszyka-usera.png" alt="User registration" /></a>
+</p>
+
+Frontend of this app is under construction on this link :
+<p>
+<a target="blank"><img src="https://github.com/Rafal-wq/-shopFE.git" alt="Repository of Frontend to this app" /></a>
 </p>

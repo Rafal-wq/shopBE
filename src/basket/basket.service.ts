@@ -10,9 +10,6 @@ import {
 } from '../interfaces/basket';
 import { UserService } from '../user/user.service';
 import { getConnection, getConnectionManager } from 'typeorm';
-import { MailService } from '../mail/mail.service';
-import { addedToBasketInfoEmailTemplate } from '../templates/email/added-to-basket-info';
-import { User } from '../user/user.entity';
 
 @Injectable()
 export class BasketService {
