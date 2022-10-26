@@ -85,7 +85,7 @@ $ nest start --watch
 <a href="https://ibb.co/dDMzSFD" target="blank"><img src="https://i.ibb.co/BB3SmbB/Dodawanie-do-koszyka-usera.png" alt="User registration" /></a>
 </p>
 
-Frontend of this app is under construction on this URL :
+Frontend of this app is under construction on this link :
 <p>
 <a target="blank"><img src="https://github.com/Rafal-wq/-shopFE.git" alt="Repository of Frontend to this app" /></a>
 </p>
