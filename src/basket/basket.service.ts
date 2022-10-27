@@ -4,19 +4,17 @@ import { AddItemDto } from './dto/add-item.dto';
 import { ItemInBasket } from './item-in-basket.entity';
 import {
   AddToBasketResponse,
-  GetBasketStatsResponse,
   GetTotalBasketPriceResponse,
   RemoveFromBasketResponse,
 } from '../interfaces/basket';
 import { UserService } from '../user/user.service';
-import { getConnection, getConnectionManager } from 'typeorm';
+import {User} from "../user/user.entity";
 
 @Injectable()
 export class BasketService {
   constructor(
     @Inject(ShopService) private shopService: ShopService,
     @Inject(UserService) private userService: UserService,
-    @Inject(MailService) private mailService: MailService,
   ) {}
 
   async add(product: AddItemDto, user: User): Promise<AddToBasketResponse> {
